@@ -9,16 +9,26 @@
     <title>Audience View</title>
 
     <script>
+
+        function statusChangeCallback(response) {
+            alert(response);
+        }
+
         $(document).ready(function() {
-        $.ajaxSetup({ cache: true });
-        $.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
-            FB.init({
-            appId: '363435027503171',
-            version: 'v2.12' // or v2.1, v2.2, v2.3, ...
-            });     
-            $('#loginbutton,#feedbutton').removeAttr('disabled');
-            FB.getLoginStatus(updateStatusCallback);
-        });
+            $.ajaxSetup({ cache: true });
+            $.getScript('https://connect.facebook.net/en_US/sdk.js', function(){
+                FB.init({
+                appId: '363435027503171',
+                version: 'v2.12' // or v2.1, v2.2, v2.3, ...
+                });     
+                
+                $('#loginbutton,#feedbutton').removeAttr('disabled');
+                FB.getLoginStatus(updateStatusCallback);
+                
+                FB.getLoginStatus(function(response) {
+                    statusChangeCallback(response);
+                });
+            });
         });    
     </script>
 </head>
